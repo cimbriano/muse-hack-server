@@ -1,9 +1,8 @@
-var socket = require('socket.io'),
-	express = require('express'),
-	app = express(),
-	io = socket.listen(app);
+var app = require('express')();
+var	server = require('http').Server(app);
+var io = require('socket.io')(server);
 
-app.listen(8080);
+server.listen(8080);
 
 app.get('/', function(req, response){
 	response.sendfile(__dirname + "/index.html");
