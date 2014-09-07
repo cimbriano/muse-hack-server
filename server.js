@@ -5,14 +5,17 @@ var io = require('socket.io')(server);
 server.listen(8080);
 
 app.get('/', function(req, response){
-	response.sendfile(__dirname + "/index.html");
+	response.sendFile(__dirname + "/index.html");
 });
 
 
-io.on('connection', function (socket) {
-  console.log('Connection received.');
+io.on('connection', function (client) {
+	console.log('Connection received.');
 
-  socket.on('oscdata', function(oscdata){
-    console.log(oscdata);
+	client.on('oscdata', function(oscdata){
+
+		client.broadcast.emit(oscdata.address, oscdata.args);
+		
+	    console.log(oscdata);
   });
 });
