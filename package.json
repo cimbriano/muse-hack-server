@@ -1,0 +1,8 @@
+{
+	"name": "muse-hack-server",
+	"version": "0.0.1",
+	"dependencies": {
+		"express": "4.8.8",
+		"socket.io": "1.1.0"
+	}
+}
