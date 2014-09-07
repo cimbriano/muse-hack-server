@@ -1,169 +1,104 @@
 <html>
 <head>
-	<script src="socket.io/socket.io.js"></script>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<script>
-		var socket = io('http://104.131.61.142:8080');
-	  socket.on('/muse/eeg', function (data) {
-			document.getElementById('eeg0').innerHTML = data[0].value;
-			document.getElementById('eeg1').innerHTML = data[1].value;
-			document.getElementById('eeg2').innerHTML = data[2].value;
-			document.getElementById('eeg3').innerHTML = data[3].value;
-	  });
-		socket.on('/muse/eeg/quantization', function (data) {
-			document.getElementById('q0').innerHTML = data[0].value;
-			document.getElementById('q1').innerHTML = data[1].value;
-			document.getElementById('q2').innerHTML = data[2].value;
-			document.getElementById('q3').innerHTML = data[3].value;
-		});
-		socket.on('/muse/acc', function(data){
-			document.getElementById('acc0').innerHTML = data[0].value;
-			document.getElementById('acc1').innerHTML = data[1].value;
-			document.getElementById('acc2').innerHTML = data[2].value;
-		});
-		socket.on('/muse/drlref', function(data){
-			document.getElementById('drlref0').innerHTML = data[0].value;
-			document.getElementById('drlref1').innerHTML = data[1].value;
-		});
-		socket.on('/muse/dsp/elements/low_freqs', function (data) {
-			document.getElementById('low_freqs0').innerHTML = data[0].value;
-			document.getElementById('low_freqs1').innerHTML = data[1].value;
-			document.getElementById('low_freqs2').innerHTML = data[2].value;
-			document.getElementById('low_freqs3').innerHTML = data[3].value;
-		});
-		socket.on('/muse/dsp/elements/alpha', function (data) {
-			document.getElementById('alpha0').innerHTML = data[0].value;
-			document.getElementById('alpha1').innerHTML = data[1].value;
-			document.getElementById('alpha2').innerHTML = data[2].value;
-			document.getElementById('alpha3').innerHTML = data[3].value;
-		});
-		socket.on('/muse/dsp/elements/beta', function (data) {
-			document.getElementById('beta0').innerHTML = data[0].value;
-			document.getElementById('beta1').innerHTML = data[1].value;
-			document.getElementById('beta2').innerHTML = data[2].value;
-			document.getElementById('beta3').innerHTML = data[3].value;
-		});
-		socket.on('/muse/dsp/elements/delta', function (data) {
-			document.getElementById('delta0').innerHTML = data[0].value;
-			document.getElementById('delta1').innerHTML = data[1].value;
-			document.getElementById('delta2').innerHTML = data[2].value;
-			document.getElementById('delta3').innerHTML = data[3].value;
-		});
-		socket.on('/muse/dsp/elements/gamma', function (data) {
-			document.getElementById('gamma0').innerHTML = data[0].value;
-			document.getElementById('gamma1').innerHTML = data[1].value;
-			document.getElementById('gamma2').innerHTML = data[2].value;
-			document.getElementById('gamma3').innerHTML = data[3].value;
-		});
-		socket.on('/muse/dsp/elements/theta', function (data) {
-			document.getElementById('theta0').innerHTML = data[0].value;
-			document.getElementById('theta1').innerHTML = data[1].value;
-			document.getElementById('theta2').innerHTML = data[2].value;
-			document.getElementById('theta3').innerHTML = data[3].value;
-		});
-		socket.on('/muse/dsp/elements/horseshoe', function (data) {
-			document.getElementById('horseshoe0').innerHTML = data[0].value;
-			document.getElementById('horseshoe1').innerHTML = data[1].value;
-			document.getElementById('horseshoe2').innerHTML = data[2].value;
-			document.getElementById('horseshoe3').innerHTML = data[3].value;
-		});
-		socket.on('/muse/dsp/elements/is_good', function (data) {
-			document.getElementById('is_good0').innerHTML = data[0].value;
-			document.getElementById('is_good1').innerHTML = data[1].value;
-			document.getElementById('is_good2').innerHTML = data[2].value;
-			document.getElementById('is_good3').innerHTML = data[3].value;
-		});
-		socket.on('/muse/dsp/elements/blink', function (data) {
-			document.getElementById('blink').innerHTML = data[0].value;
-		});
-		socket.on('/muse/dsp/elements/jaw_clench', function (data) {
-			document.getElementById('jaw_clench').innerHTML = data[0].value;
-		});
-		socket.on('/muse/dsp/elements/touching_forehead', function (data) {
-			document.getElementById('touching_forehead').innerHTML = data[0].value;
-		});
+    <script src="socket.io/socket.io.js"></script>
 
-	</script>
+    <script src="rickshaw/vendor/d3.min.js"></script>
+    <script src="rickshaw/vendor/d3.layout.min.js"></script>
+    <script src="rickshaw/rickshaw.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="rickshaw/rickshaw.css">
+    
 </head>
-<body>
-	<div class='box eeg'>
-			<div class='element'>eeg 0: <p id='eeg0'></p></div>
-			<div class='element'>eeg 1: <p id='eeg1'></p></div>
-			<div class='element'>eeg 2: <p id='eeg2'></p></div>
-			<div class='element'>eeg 3: <p id='eeg3'></p></div>
-	</div>
-	<div class='box quantization'>
-			<div class='element'>q 0: <p id='q0'></p></div>
-			<div class='element'>q 1: <p id='q1'></p></div>
-			<div class='element'>q 2: <p id='q2'></p></div>
-			<div class='element'>q 3: <p id='q3'></p></div>
-	</div>
-	<div class='box acc'>
-			<div class='element'>acc 0: <p id='acc0'></p></div>
-			<div class='element'>acc 1: <p id='acc1'></p></div>
-			<div class='element'>acc 2: <p id='acc2'></p></div>
-	</div>
-	<div class='box drlref'>
-			<div class='element'>drlref 0: <p id='drlref0'></p></div>
-			<div class='element'>drlref 1: <p id='drlref1'></p></div>
-	</div>
-	<div class='box low_freqs'>
-			<div class='element'>low_freqs 0: <p id='low_freqs0'></p></div>
-			<div class='element'>low_freqs 1: <p id='low_freqs1'></p></div>
-			<div class='element'>low_freqs 2: <p id='low_freqs2'></p></div>
-			<div class='element'>low_freqs 3: <p id='low_freqs3'></p></div>
-	</div>
-	<div class='box alpha'>
-			<div class='element'>alpha 0: <p id='alpha0'></p></div>
-			<div class='element'>alpha 1: <p id='alpha1'></p></div>
-			<div class='element'>alpha 2: <p id='alpha2'></p></div>
-			<div class='element'>alpha 3: <p id='alpha3'></p></div>
-	</div>
-	<div class='box beta'>
-			<div class='element'>beta 0: <p id='beta0'></p></div>
-			<div class='element'>beta 1: <p id='beta1'></p></div>
-			<div class='element'>beta 2: <p id='beta2'></p></div>
-			<div class='element'>beta 3: <p id='beta3'></p></div>
-	</div>
-	<div class='box delta'>
-			<div class='element'>delta 0: <p id='delta0'></p></div>
-			<div class='element'>delta 1: <p id='delta1'></p></div>
-			<div class='element'>delta 2: <p id='delta2'></p></div>
-			<div class='element'>delta 3: <p id='delta3'></p></div>
-	</div>
-	<div class='box gamma'>
-			<div class='element'>gamma 0: <p id='gamma0'></p></div>
-			<div class='element'>gamma 1: <p id='gamma1'></p></div>
-			<div class='element'>gamma 2: <p id='gamma2'></p></div>
-			<div class='element'>gamma 3: <p id='gamma3'></p></div>
-	</div>
-	<div class='box theta'>
-			<div class='element'>theta 0: <p id='theta0'></p></div>
-			<div class='element'>theta 1: <p id='theta1'></p></div>
-			<div class='element'>theta 2: <p id='theta2'></p></div>
-			<div class='element'>theta 3: <p id='theta3'></p></div>
-	</div>
-	<div class='box horseshoe'>
-			<div class='element'>horseshoe 0: <p id='horseshoe0'></p></div>
-			<div class='element'>horseshoe 1: <p id='horseshoe1'></p></div>
-			<div class='element'>horseshoe 2: <p id='horseshoe2'></p></div>
-			<div class='element'>horseshoe 3: <p id='horseshoe3'></p></div>
-	</div>
-	<div class='box is_good'>
-			<div class='element'>is_good 0: <p id='is_good0'></p></div>
-			<div class='element'>is_good 1: <p id='is_good1'></p></div>
-			<div class='element'>is_good 2: <p id='is_good2'></p></div>
-			<div class='element'>is_good 3: <p id='is_good3'></p></div>
-	</div>
-	<div class='box blink'>
-			<div class='element'>blink: <p id='blink'></p></div>
-	</div>
-	<div class='box jaw_clench'>
-			<div class='element'>jaw_clench: <p id='jaw_clench'></p></div>
-	</div>
-	<div class='box touching_forehead'>
-			<div class='element'>touching_forehead: <p id='touching_forehead'></p></div>
-	</div>
+    <body>
+        <div id="graphs">
+            <div id="eeg_y_axis"></div>
+            <div id="eeg_graph"></div>
+        </div>
 
+        <div id="table">
+            <div class='box eeg'>
+                    <div class='element'>eeg 0: <p id='eeg0'></p></div>
+                    <div class='element'>eeg 1: <p id='eeg1'></p></div>
+                    <div class='element'>eeg 2: <p id='eeg2'></p></div>
+                    <div class='element'>eeg 3: <p id='eeg3'></p></div>
+            </div>
+            <div class='box quantization'>
+                    <div class='element'>q 0: <p id='q0'></p></div>
+                    <div class='element'>q 1: <p id='q1'></p></div>
+                    <div class='element'>q 2: <p id='q2'></p></div>
+                    <div class='element'>q 3: <p id='q3'></p></div>
+            </div>
+            <div class='box acc'>
+                    <div class='element'>acc 0: <p id='acc0'></p></div>
+                    <div class='element'>acc 1: <p id='acc1'></p></div>
+                    <div class='element'>acc 2: <p id='acc2'></p></div>
+            </div>
+            <div class='box drlref'>
+                    <div class='element'>drlref 0: <p id='drlref0'></p></div>
+                    <div class='element'>drlref 1: <p id='drlref1'></p></div>
+            </div>
+            <div class='box low_freqs'>
+                    <div class='element'>low_freqs 0: <p id='low_freqs0'></p></div>
+                    <div class='element'>low_freqs 1: <p id='low_freqs1'></p></div>
+                    <div class='element'>low_freqs 2: <p id='low_freqs2'></p></div>
+                    <div class='element'>low_freqs 3: <p id='low_freqs3'></p></div>
+            </div>
+            <div class='box alpha'>
+                    <div class='element'>alpha 0: <p id='alpha0'></p></div>
+                    <div class='element'>alpha 1: <p id='alpha1'></p></div>
+                    <div class='element'>alpha 2: <p id='alpha2'></p></div>
+                    <div class='element'>alpha 3: <p id='alpha3'></p></div>
+            </div>
+            <div class='box beta'>
+                    <div class='element'>beta 0: <p id='beta0'></p></div>
+                    <div class='element'>beta 1: <p id='beta1'></p></div>
+                    <div class='element'>beta 2: <p id='beta2'></p></div>
+                    <div class='element'>beta 3: <p id='beta3'></p></div>
+            </div>
+            <div class='box delta'>
+                    <div class='element'>delta 0: <p id='delta0'></p></div>
+                    <div class='element'>delta 1: <p id='delta1'></p></div>
+                    <div class='element'>delta 2: <p id='delta2'></p></div>
+                    <div class='element'>delta 3: <p id='delta3'></p></div>
+            </div>
+            <div class='box gamma'>
+                    <div class='element'>gamma 0: <p id='gamma0'></p></div>
+                    <div class='element'>gamma 1: <p id='gamma1'></p></div>
+                    <div class='element'>gamma 2: <p id='gamma2'></p></div>
+                    <div class='element'>gamma 3: <p id='gamma3'></p></div>
+            </div>
+            <div class='box theta'>
+                    <div class='element'>theta 0: <p id='theta0'></p></div>
+                    <div class='element'>theta 1: <p id='theta1'></p></div>
+                    <div class='element'>theta 2: <p id='theta2'></p></div>
+                    <div class='element'>theta 3: <p id='theta3'></p></div>
+            </div>
+            <div class='box horseshoe'>
+                    <div class='element'>horseshoe 0: <p id='horseshoe0'></p></div>
+                    <div class='element'>horseshoe 1: <p id='horseshoe1'></p></div>
+                    <div class='element'>horseshoe 2: <p id='horseshoe2'></p></div>
+                    <div class='element'>horseshoe 3: <p id='horseshoe3'></p></div>
+            </div>
+            <div class='box is_good'>
+                    <div class='element'>is_good 0: <p id='is_good0'></p></div>
+                    <div class='element'>is_good 1: <p id='is_good1'></p></div>
+                    <div class='element'>is_good 2: <p id='is_good2'></p></div>
+                    <div class='element'>is_good 3: <p id='is_good3'></p></div>
+            </div>
+            <div class='box blink'>
+                    <div class='element'>blink: <p id='blink'></p></div>
+            </div>
+            <div class='box jaw_clench'>
+                    <div class='element'>jaw_clench: <p id='jaw_clench'></p></div>
+            </div>
+            <div class='box touching_forehead'>
+                    <div class='element'>touching_forehead: <p id='touching_forehead'></p></div>
+            </div>
+        </div>
+    </body>
 
-</body></html>
+    <script src="js/setup.js"></script>
+<!-- <script src="js/tabular_data.js"></script> -->
+    <script src="js/rickshaw_viz.js"></script>
+</html>
