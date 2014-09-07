@@ -19,7 +19,7 @@ io.on('connection', function (client) {
 		message_counter += 1;
 
 		if(message_counter % 10000 == 0) {
-			console.log('Recieved 10k messages');
+			console.log('Recieved 10k messages' + message_counter / 10000);
 		}
   });
 });
