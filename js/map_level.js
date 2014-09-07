@@ -11,4 +11,5 @@ socket.on('/muse/dsp/elements/alpha', function (data) {
     });
 
     level = Math.round(avgAlpha.map(0.1, 0.6, 0, 7));
+    
 });
