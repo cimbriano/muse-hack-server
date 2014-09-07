@@ -84,16 +84,6 @@ var togglePin = function(target, message) {
     });
 }
 
-var checkPins = function() {
-  console.log("Checking pins");
-  $.post("https://api.spark.io/v1/devices/events/", {
-    name: "checkpins",
-    access_token: accessToken
-  }, function(data) {
-      console.log(data);
-  });
-}
-
 var setLevel = function(level, high_or_low){
 	left = "A" + level;
 	right = "D" + level;
@@ -110,4 +100,24 @@ var on = function(level) {
 
 var off = function(level) {
 	setLevel(level, "LOW");
+}
+
+var change = function(from, to) {
+	if (from == to) {
+
+		// Do nothing.
+
+	} else if(from < to) { // Turn on more
+
+		for(var i = (from + 1); i <= to; i++) {
+			on(i);
+		}
+
+	} else { // turn some off
+
+		for(var i = from; i >= (to + 1); i--){
+			off(i);
+		}
+
+	}
 }
