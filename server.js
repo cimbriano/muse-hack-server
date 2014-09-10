@@ -25,7 +25,9 @@ io.on('connection', function (client) {
 
 	client.on('oscdata', function(oscdata){
 
-		client.broadcast.emit(oscdata.address, oscdata.args);
+		console.log(Date.now() - oscdata.timeInMs + "ms of latency"); //Outputs latency from the local to the remote server
+		// oscdata.args['timeInMs'] = oscdata.timeInMs;
+		client.broadcast.emit(oscdata.address, oscdata);
 		message_counter += 1;
 
 		if(message_counter % 2000 == 0) {

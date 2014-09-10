@@ -32,10 +32,10 @@ eeg_graph.render();
 var new_data = {};
 socket.on('/muse/dsp/elements/alpha', function(data){
 
-	new_data[0] = data[0].value
-	new_data[1] = data[1].value
-	new_data[2] = data[2].value
-	new_data[3] = data[3].value
+	new_data[0] = data.args[0].value
+	new_data[1] = data.args[1].value
+	new_data[2] = data.args[2].value
+	new_data[3] = data.args[3].value
 
 	eeg_graph.series.addData(new_data);
 	eeg_graph.render();

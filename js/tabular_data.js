@@ -25,11 +25,23 @@
 //     document.getElementById('low_freqs2').innerHTML = data[2].value;
 //     document.getElementById('low_freqs3').innerHTML = data[3].value;
 // });
+var highLatency = 0;
+var lowLatency = 0;
 socket.on('/muse/dsp/elements/alpha', function (data) {
-    document.getElementById('alpha0').innerHTML = data[0].value;
-    document.getElementById('alpha1').innerHTML = data[1].value;
-    document.getElementById('alpha2').innerHTML = data[2].value;
-    document.getElementById('alpha3').innerHTML = data[3].value;
+    document.getElementById('alpha0').innerHTML = data['args'][0].value;
+    document.getElementById('alpha1').innerHTML = data['args'][1].value;
+    document.getElementById('alpha2').innerHTML = data['args'][2].value;
+    document.getElementById('alpha3').innerHTML = data['args'][3].value;
+    // document.getElementById('alphalatency').innerHTML = data
+    var latency = Date.now() - data.timeInMs;
+    console.log(latency+"ms latency"); //measures latency to the browser
+
+    if(latency > highLatency){
+      highLatency = latency;
+    }else if(latency < lowLatency){
+      lowLatency = latency;
+    }
+    console.log('Latency Range: '+lowLatency+"ms - "+highLatency+"ms");
 });
 // socket.on('/muse/dsp/elements/beta', function (data) {
 //     document.getElementById('beta0').innerHTML = data[0].value;
