@@ -13,3 +13,73 @@ body{
   vertical-align:top;
   width: 20%;
 }
+.dark-bg{
+  display:none;
+  position:absolute;
+  top:0;
+  background-color: #333;
+  background-color: rgba(0,0,0,0.8);
+  width: 100%;
+  height: 100%;
+}
+.twitter-modal{
+  display:none;
+  width: 40%;
+  height: 175px;
+  padding: 15px;
+  font-size: 27px;
+  background: #eee;
+  position: absolute;
+  top: 40%;
+  left: 30%;
+  border-radius: 3px;
+}
+a.close{
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  font-size: 13px;
+}
+.btn {
+padding: 5px 5px;
+}
+
+.btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: inline-block;
+  padding: 4px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+  vertical-align: middle;
+  cursor: pointer;
+  background-repeat: repeat-x;
+  border: 1px solid #cccccc;
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+  border-bottom-color: #b3b3b3;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+}
+.btn-cta {
+  margin: 6px 0 0;
+  background-color: #4cb6e9;
+  color: #ffffff;
+  text-shadow: none;
+  padding: 8px 12px;
+  line-height: 1;
+  /*background-image: linear-gradient(top,#4cb6e9,#0481b1);*/
+  background-repeat: repeat-x;
+  border: 1px solid #0481b1;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+}
+.btn-clicked{
+  background-color: #0481B1!important;
+  transition-duration:300ms;
+  transition-delay:5000ms;
+}

@@ -75,4 +75,4 @@ socket.on('/muse/dsp/elements/alpha', function (data) {
 // });
 // socket.on('/muse/dsp/elements/touching_forehead', function (data) {
 //     document.getElementById('touching_forehead').innerHTML = data[0].value;
-// }); 
+// });

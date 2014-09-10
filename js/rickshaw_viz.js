@@ -8,9 +8,10 @@ var time_base = new Date().getTime() / 1000;
 var eeg_graph = new Rickshaw.Graph({
 	element: document.getElementById('eeg_graph'),
 	width: 900,
-	height: 500,
+	height: 350,
 	renderer: 'line',
-
+  min: 0,
+  max: 1,
 	series: new Rickshaw.Series.FixedDuration([{name: 'default'}], undefined, {
 		timeInterval: time_value,
 		maxDataPoints: max_data_points,

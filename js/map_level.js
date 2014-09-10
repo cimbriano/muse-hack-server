@@ -1,4 +1,7 @@
-var current_level = 0;
+var lights_level = 3;
+var level = 0;
+var time_of_last = Date.now();
+initLights();
 
 socket.on('/muse/dsp/elements/alpha', function (data) {
     var total = 0;
@@ -12,7 +15,13 @@ socket.on('/muse/dsp/elements/alpha', function (data) {
       avgAlpha = total/active;
     });
 
-    level = Math.abs(Math.round(avgAlpha.map(0.1, 0.6, 0, 7)));
+    level = alphaLevelMap(avgAlpha);
 
-    if(current_level != level) change(current_level, level);
+    if((Date.now() - time_of_last) > 2000){
+      if(lights_level != level){
+        change(lights_level, level);
+        lights_level = level;
+        time_of_last = Date.now();
+      }
+    }
 });

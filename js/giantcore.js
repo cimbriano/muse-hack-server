@@ -1,7 +1,7 @@
 // Using the giantcore code found at:
 // https://github.com/zsup/giantcore/blob/master/script.js
 
-var accessToken = "7463f6b1577691cc5d287929be89ad469ce0938e";
+var accessToken = "98d16fbc61e4dff5e9061c932344143724998c53";
 var core1 = "53ff7a065075535118461187";
 var core2 = "50ff68065067545647400387";
 var core3 = "55ff72065075555322220487";
@@ -77,7 +77,7 @@ var cores = {
 
 var togglePin = function(target, message) {
     message = target.pin + "," + message;
-    console.log(message);
+    // console.log(message);
     $.post( "https://api.spark.io/v1/devices/" + target.core + "/digitalwrite", {
         args: message, access_token: accessToken }, function( data ) {
         console.log( data );
@@ -88,36 +88,76 @@ var setLevel = function(level, high_or_low){
 	left = "A" + level;
 	right = "D" + level;
 
-	// console.log(left);
-
 	togglePin(cores[left], high_or_low);
 	togglePin(cores[right], high_or_low);
 }
 
 var on = function(level) {
 	setLevel(level, "HIGH");
+  console.log('on '+level);
 }
 
 var off = function(level) {
 	setLevel(level, "LOW");
+  console.log('off '+level);
+}
+
+var achievedZen = function(){
+  $(".twitter-modal").show();
+  $(".dark-bg").show();
+  $(".tweet-text").typed({
+    strings: ["I've achieved zen @TechCrunch #HackDisrupt w/ @cimbriano, @sparkdevices, @digitalocean, and @twitterdev."],
+    typeSpeed: 0
+  });
+  $(".btn").addClass('btn-clicked');
+  $('.close').bind('click', function(){
+    $('.twitter-modal').hide();
+    $(".dark-bg").hide();
+  });
 }
 
 var change = function(from, to) {
+  var log = '';
+  console.log(to);
+  if(to == -1){
+    socket.emit('zenachieved', {});
+    achievedZen();
+  }
+
 	if (from == to) {
-
 		// Do nothing.
-
+    log = 'flat';
 	} else if(from < to) { // Turn on more
 
 		for(var i = (from + 1); i <= to; i++) {
-			on(i);
+      console.log('on '+2*i);
+			on(2*i);
 		}
+
+    log = 'up';
 
 	} else { // turn some off
 
 		for(var i = from; i >= (to + 1); i--){
-			off(i);
+      console.log('off '+2*i);
+			off(2*i);
 		}
 
+    log = 'down';
+
 	}
+
+  console.log(log + ' from '+from+' to '+to);
+
+}
+
+var initLights = function(){
+  for(var i = 0; i <= 7; i++){
+    togglePin(cores["A"+i], "LOW");
+    togglePin(cores["D"+i], "LOW");
+  }
+  on(0);
+  on(2);
+  on(4);
+  on(6);
 }
