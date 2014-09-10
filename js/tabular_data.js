@@ -26,7 +26,7 @@
 //     document.getElementById('low_freqs3').innerHTML = data[3].value;
 // });
 var highLatency = 0;
-var lowLatency = 0;
+var lowLatency = 100;
 socket.on('/muse/dsp/elements/alpha', function (data) {
     document.getElementById('alpha0').innerHTML = data['args'][0].value;
     document.getElementById('alpha1').innerHTML = data['args'][1].value;

@@ -12,6 +12,10 @@ var twit = new twitter({
 });
 
 server.listen(8080);
+app.configure(function () {
+		app.use('/', express.static(__dirname + '/'));
+    app.use('/js', express.static(__dirname + '/js'));
+});
 
 app.get('/', function(req, response){
 	response.sendFile(__dirname + "/index.html");
