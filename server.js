@@ -1,4 +1,5 @@
-var app = require('express')();
+var express = require('express');
+var app = express();
 var	server = require('http').Server(app);
 var io = require('socket.io')(server);
 
@@ -12,10 +13,8 @@ var twit = new twitter({
 });
 
 server.listen(8080);
-app.configure(function () {
-		app.use('/', express.static(__dirname + '/'));
-    app.use('/js', express.static(__dirname + '/js'));
-});
+
+app.use(express.static(__dirname + '/'));
 
 app.get('/', function(req, response){
 	response.sendFile(__dirname + "/index.html");
